@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EmployeeLib.DAL;
+using EmployeeLib.DBSim;
+
+namespace EmployeeLib.BLL
+{
+    public sealed class UserHandler
+    {
+        public IList<UserDTO> GetUsers()
+        {
+            var enities = new UserRepository().GetAllUsers();
+            var converter = new UserConverter();
+            var dtos = enities.Select(entity => converter.ConvertToUserDTO(entity)).ToList();
+            return dtos;
+        }
+
+        public UserDTO GetUser(long userId)
+        {
+            var entity = new UserRepository().GetUserById(userId);
+            return new UserConverter().ConvertToUserDTO(entity);
+        }
+
+        public long SaveNewUser(UserDTO user)
+        {
+            var entity = new UserEntity();
+            new UserStateTransfer(user, entity).TransferState();
+            StaticDB.SaveChanges(entity);
+            return entity._userID;
+        }
+
+        public long UpdateUser(UserDTO user)
+        {
+            var entity = new UserRepository().GetUserById(user.Id);
+            new UserStateTransfer(user, entity).TransferState();
+            StaticDB.SaveChanges(entity);
+            return entity._userID;
+        }
+
+        public void DeleteUser(long userId)
+        {
+            var entity = new UserRepository().GetUserById(userId);
+            StaticDB.DeleteObject(entity);
+        }
+    }
+}
