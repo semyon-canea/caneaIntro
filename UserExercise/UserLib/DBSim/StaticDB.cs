@@ -30,16 +30,16 @@ namespace EmployeeLib.DBSim
             {
                 _userID = 1,
                 FirstName = "Jacob",
-                LastName = "Larsson",
-                UserName = "jacob.larsson",
+                LastName = "Jensson",
+                UserName = "jacob.",
                 IsActive = true,
                 IsSuspended = false
             };
             var jacobContact = new ContactInformationEntity()
             {
                 ID_ContactInformation = 1,
-                Email = "jacob.larsson@canea.se",
-                Phone = "0725706069",
+                Email = "jacob@canea.se",
+                Phone = "07233344455",
                 UserID = 1
             };
             users.Add(jacob);
@@ -48,16 +48,16 @@ namespace EmployeeLib.DBSim
             {
                 _userID = 2,
                 FirstName = "Lars",
-                LastName = "Olsson",
-                UserName = "lars.olsson",
+                LastName = "Jensson",
+                UserName = "lars.",
                 IsActive = true,
                 IsSuspended = false
             };
             var larsContact = new ContactInformationEntity()
             {
                 ID_ContactInformation = 2,
-                Email = "lars.olsson@canea.se",
-                Phone = "0733551102",
+                Email = "lars@canea.se",
+                Phone = "07233344466",
                 UserID = 2
             };
             users.Add(lars);
@@ -66,15 +66,15 @@ namespace EmployeeLib.DBSim
             {
                 _userID = 3,
                 FirstName = "Hampus",
-                LastName = "Lilja",
-                UserName = "hampus.lilja",
+                LastName = "Jensson",
+                UserName = "hampus.",
                 IsActive = true,
                 IsSuspended = true // Suspended!
             };
             var hampusContact = new ContactInformationEntity()
             {
                 ID_ContactInformation = 3,
-                Email = "hampus.lilja@canea.se",
+                Email = "hampus@canea.se",
                 Phone = null,
                 UserID = 3
             };
@@ -104,7 +104,7 @@ namespace EmployeeLib.DBSim
             }
             else
             {
-                entity._userID = users.Select(x => x._userID).Max() + 1;
+                entity._userID = users.Any() ?  users.Select(x => x._userID).Max() + 1 :  1;
                 users.Add(CreateUserCopy(entity));
             }
             
@@ -125,7 +125,7 @@ namespace EmployeeLib.DBSim
             }
             else
             {
-                entity.ID_ContactInformation = contactInformations.Select(x => x.ID_ContactInformation).Max() + 1;
+                entity.ID_ContactInformation = contactInformations.Any() ? contactInformations.Select(x => x.ID_ContactInformation).Max() + 1 : 1;
                 contactInformations.Add(CreateContactInformationCopy(entity));
             }
         }

@@ -11,7 +11,15 @@ namespace EmployeeLib.BLL
     {
         public UserDTO ConvertToUserDTO(UserEntity entity)
         {
-            return new UserDTO(entity._userID);
+            var converter = new ContactInformationConverter();
+            List<ContactInformationDTO> contactInformation = null;
+            if (entity.ContactInformations != null)
+            {
+                contactInformation = entity.ContactInformations.Select(
+                        contactInformationEntity => converter.ConvertToContactInformationDto(contactInformationEntity))
+                    .ToList();
+            }
+            return new UserDTO(entity._userID, entity.FirstName,entity.LastName,entity.UserName,entity.IsActive, entity.IsSuspended, contactInformation);
         }
     }
 }
