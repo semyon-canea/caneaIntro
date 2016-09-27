@@ -92,11 +92,11 @@
 
                         </div>
                         <div class="row">
-                            <asp:CheckBox runat="server" Rows="1" ID="isActive"></asp:CheckBox>
+                            <asp:CheckBox runat="server" ID="isActive"></asp:CheckBox>
 
                         </div>
                         <div class="row">
-                            <asp:CheckBox runat="server" Rows="1" ID="isSuspended"></asp:CheckBox>
+                            <asp:CheckBox runat="server" ID="isSuspended"></asp:CheckBox>
 
                         </div>
                         <div class="row">
