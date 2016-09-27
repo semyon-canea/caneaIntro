@@ -37,35 +37,33 @@
 
                     </div>
                 </ItemTemplate>
-
-
             </asp:Repeater>
             <div class="row">
                 <asp:Button runat="server" OnClick="newUser_OnServerClick" Text="New user"></asp:Button>
 
             </div>
-            <%if (SelectedUser != null)
+            <%if (Model.SelectedUser != null)
                 { %>
             <div class="js-UserContainer">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="row">
-                            <label for="userName">Username</label>
+                            <asp:Label runat="server" AssociatedControlID="userName">Username</asp:Label>
                         </div>
                         <div class="row">
-                            <label for="firstName">FirstName</label>
+                            <asp:Label runat="server" AssociatedControlID="firstName">FirstName</asp:Label>
                         </div>
                         <div class="row">
-                            <label for="lastName">LastName</label>
+                            <asp:Label runat="server" AssociatedControlID="lastName">LastName</asp:Label>
                         </div>
                         <div class="row">
-                            <label for="isActive">IsActive</label>
+                            <asp:Label runat="server" AssociatedControlID="isActive">IsActive</asp:Label>
                         </div>
                         <div class="row">
-                            <label for="Phone">Phone</label>
+                            <asp:Label runat="server" AssociatedControlID="phone">Phone</asp:Label>
                         </div>
                         <div class="row">
-                            <label for="Email">Email</label>
+                            <asp:Label runat="server" AssociatedControlID="email">Email</asp:Label>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -73,24 +71,22 @@
                             <asp:HiddenField runat="server" ID="UserId"></asp:HiddenField>
                         </div>
                         <div class="row">
-                            <asp:TextBox runat="server" Rows="1" ID="userName"></asp:TextBox>
+                            <asp:TextBox runat="server" Rows="1" ID="userName" Text="<%# Model.SelectedUser?.UserName ?? string.Empty %>"></asp:TextBox>
                         </div>
                         <div class="row">
-                            <asp:TextBox runat="server" Rows="1" ID="firstName"></asp:TextBox>
+                            <asp:TextBox runat="server" Rows="1" ID="firstName" Text="<%# Model.SelectedUser?.FirstName ?? string.Empty %>"></asp:TextBox>
                         </div>
                         <div class="row">
-                            <asp:TextBox runat="server" Rows="1" ID="lastName"></asp:TextBox>
-
+                            <asp:TextBox runat="server" Rows="1" ID="lastName" Text="<%# Model.SelectedUser?.LastName ?? string.Empty %>"></asp:TextBox>
                         </div>
                         <div class="row">
-                            <asp:CheckBox runat="server" ID="isActive"></asp:CheckBox>
-
+                            <asp:CheckBox runat="server" ID="isActive" Checked="<%# Model.SelectedUser?.IsActive ?? false %>"></asp:CheckBox>
                         </div>
                         <div class="row">
-                            <asp:TextBox runat="server" Rows="1" ID="phone"></asp:TextBox>
+                            <asp:TextBox runat="server" Rows="1" ID="phone" Text="<%# Model.SelectedUser?.ContactInformation.Phone ?? string.Empty %>"></asp:TextBox>
                         </div>
                         <div class="row">
-                            <asp:TextBox runat="server" Rows="1" ID="email"></asp:TextBox>
+                            <asp:TextBox runat="server" Rows="1" ID="email" Text="<%# Model.SelectedUser?.ContactInformation.Email ?? string.Empty %>"></asp:TextBox>
                         </div>
                     </div>
                 </div>

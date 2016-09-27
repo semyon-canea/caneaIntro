@@ -44,6 +44,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common\bin\Debug\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.UI">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common.UI\bin\Debug\Common.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.UI.WebForms">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common.UI.WebForms\bin\Debug\Common.UI.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Framework.Web.UI.WebForms">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\UI\Framework.Web.UI.WebForms\bin\Debug\Framework.Web.UI.WebForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +89,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common.UI\bin\Debug\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common.UI\bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,6 +130,18 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Design">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.Device.Detection">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.Device.Detection.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>

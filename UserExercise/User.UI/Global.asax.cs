@@ -6,6 +6,11 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using Canea.Common.UI.DependencyInjection;
+using Canea.Common.UI.View;
+using Canea.Framework.Web.UI.WebForms.Application;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 
 namespace User.UI
 {
@@ -14,6 +19,12 @@ namespace User.UI
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+            var container = new CaneaWebContainer();
+            //new WebServiceDependencies().RegisterDependencies(container);
+            new FrameworkWebDependencies(container).RegisterDependencies();
+            IServiceLocator serviceLocator = new UnityServiceLocator(container);
+            ServiceLocator.SetLocatorProvider(() => serviceLocator);
+            container.RegisterPerWebSession<StateRegistry>("StateRegistry");
         }
     }
 }

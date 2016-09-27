@@ -1,115 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using EmployeeLib.BLL;
+using Canea.Common.UI.WebForms.View;
 using User.UI.Logic;
-using UserLib.BLL;
 
 namespace User.UI
 {
-    public partial class _Default : Page
+    public partial class _Default : PageBase<DefaultPageController, DefaultPageModel>, IDefaultPageView
     {
-        private readonly UserHandler _userHandler;
-        private UserBO _selectedUser;
-
-        public _Default()
-        {
-            _userHandler = new UserHandler();
-        }
-
-        public IList<UserBO> Users { get; set; }
-
-        public UserBO SelectedUser
-        {
-            get { return _selectedUser; }
-            set
-            {
-                _selectedUser = value;
-                SetUserFields();
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            SetUserSource();
+            UpdateUserDataSource();
+        }
+
+        protected override void OnUnbind(EventArgs e)
+        {
+            base.OnUnbind(e);
+
+            var modelSelectedUser = Model.SelectedUser;
+            if (modelSelectedUser != null)
+            {
+                modelSelectedUser.FirstName = this.firstName.Text;
+                modelSelectedUser.LastName = this.lastName.Text;
+                modelSelectedUser.UserName = this.userName.Text;
+                modelSelectedUser.IsActive = this.isActive.Checked;
+                modelSelectedUser.ContactInformation.Email = this.email.Text;
+                modelSelectedUser.ContactInformation.Phone = this.phone.Text;
+            }
         }
 
         protected void editUser_OnServerClick(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            long userId;
-            if (button.CommandArgument != null && button.CommandArgument.Any() && long.TryParse(button.CommandArgument[0].ToString(), out userId))
-            {
-                SelectedUser = new UserBOConverter().Convert(_userHandler.GetUser(userId));
-            }
+            var userId = long.Parse(button.CommandArgument[0].ToString());
+            Controller.EditUser(userId);
         }
 
         protected void newUser_OnServerClick(object sender, EventArgs e)
         {
-            SelectedUser = new UserBO();
+            Model.SelectedUser = new UserBO();
         }
 
         protected void saveUser_OnServerClick(object sender, EventArgs e)
         {
-            var userId = long.Parse(UserId.Value);
-
-            var user = new UserUpdateData(userId, firstName.Text,
-                lastName.Text, userName.Text, isActive.Checked,
-                 new ContactInformationUpdateData(0, userId, email.Text, phone.Text));
-            if (user.IsPersisted)
-            {
-                _userHandler.UpdateUser(user);
-            }
-            else
-            {
-                _userHandler.SaveNewUser(user);
-            }
-            SetUserSource();
+            Controller.SaveUser();
         }
 
         protected void cancel_OnServerClick(object sender, EventArgs e)
         {
-            SelectedUser = null;
+            Model.SelectedUser = null;
         }
 
         protected void deleteUser_OnServerClick(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            long userId;
-            if (button.CommandArgument != null && button.CommandArgument.Any() && long.TryParse(button.CommandArgument[0].ToString(), out userId))
-            {
-                _userHandler.DeleteUser(userId);
-                SetUserSource();
-            }
+            var userId = long.Parse(button.CommandArgument[0].ToString());
+            Controller.DeleteUser(userId);
         }
 
-        private void SetUserSource()
+        public void UpdateUserDataSource()
         {
-            var converter = new UserBOConverter();
-            Users = _userHandler.GetUsers().Select(converter.Convert).ToList();
-            Repeater1.DataSource = Users;
+            Repeater1.DataSource = Model.Users;
             Repeater1.DataBind();
-        }
-
-        private void SetUserFields()
-        {
-            if (SelectedUser == null)
-            {
-                return;
-            }
-            userName.Text = SelectedUser.UserName;
-            firstName.Text = SelectedUser.FirstName;
-            lastName.Text = SelectedUser.LastName;
-            isActive.Checked = SelectedUser.IsActive;
-            UserId.Value = SelectedUser.Id.ToString();
-            if (SelectedUser.ContactInformation != null)
-            {
-                var contactInformationDto = SelectedUser.ContactInformation;
-                email.Text = contactInformationDto.Email;
-                phone.Text = contactInformationDto.Phone;
-            }
         }
     }
 }

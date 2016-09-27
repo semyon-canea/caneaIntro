@@ -13,7 +13,7 @@
             ContactInformation = contactInformation;
         }
 
-        public UserBO() : this(id: 0, firstName: null, lastName: null, userName: null, isActive: false, contactInformation: null)
+        public UserBO() : this(id: 0, firstName: null, lastName: null, userName: null, isActive: false, contactInformation: new ContactInformationBO())
         {
 
         }

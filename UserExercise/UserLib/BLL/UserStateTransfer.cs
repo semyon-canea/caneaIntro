@@ -69,7 +69,6 @@ namespace EmployeeLib.BLL
         {
             target.Email = source.Email;
             target.Phone = source.Phone;
-            target.UserID = source.UserId;
             target.ID_ContactInformation = source.Id;
         }
 
