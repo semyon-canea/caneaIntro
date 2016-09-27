@@ -14,7 +14,6 @@
                 <div class="col-lg-1">FirstName</div>
                 <div class="col-lg-1">LastName</div>
                 <div class="col-lg-1">IsActive</div>
-                <div class="col-lg-1">IsSuspended</div>
                 <div class="col-lg-1">Phone</div>
                 <div class="col-lg-1">Email</div>
             </div>
@@ -28,11 +27,8 @@
                         <div class="col-lg-1">
                             <input type="checkbox" <%# (bool)Eval("IsActive") ? "checked":"" %> disabled="disabled" />
                         </div>
-                        <div class="col-lg-1">
-                            <input type="checkbox" <%# (bool)Eval("IsSuspended") ? "checked":"" %> disabled="disabled" />
-                        </div>
-                        <div class="col-lg-1"><%# Eval("ContactInformation[0].Phone") %></div>
-                        <div class="col-lg-2"><%# Eval("ContactInformation[0].Email") %></div>
+                        <div class="col-lg-1"><%# Eval("ContactInformation.Phone") %></div>
+                        <div class="col-lg-2"><%# Eval("ContactInformation.Email") %></div>
 
                         <div class="col-lg-1">
                             <asp:Button runat="server" OnClick="editUser_OnServerClick" Text="Edit" CommandArgument='<%#Eval("Id")%>'></asp:Button>
@@ -66,9 +62,6 @@
                             <label for="isActive">IsActive</label>
                         </div>
                         <div class="row">
-                            <label for="isSuspended">IsSuspended</label>
-                        </div>
-                        <div class="row">
                             <label for="Phone">Phone</label>
                         </div>
                         <div class="row">
@@ -78,11 +71,9 @@
                     <div class="col-lg-2">
                         <div class="row">
                             <asp:HiddenField runat="server" ID="UserId"></asp:HiddenField>
-
                         </div>
                         <div class="row">
                             <asp:TextBox runat="server" Rows="1" ID="userName"></asp:TextBox>
-
                         </div>
                         <div class="row">
                             <asp:TextBox runat="server" Rows="1" ID="firstName"></asp:TextBox>
@@ -96,19 +87,12 @@
 
                         </div>
                         <div class="row">
-                            <asp:CheckBox runat="server" ID="isSuspended"></asp:CheckBox>
-
-                        </div>
-                        <div class="row">
                             <asp:TextBox runat="server" Rows="1" ID="phone"></asp:TextBox>
                         </div>
                         <div class="row">
                             <asp:TextBox runat="server" Rows="1" ID="email"></asp:TextBox>
-
                         </div>
-
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
@@ -124,3 +108,4 @@
 
     </div>
 </body>
+</html>

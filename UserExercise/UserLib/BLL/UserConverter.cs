@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using EmployeeLib.DAL;
 
 namespace EmployeeLib.BLL
@@ -12,12 +8,10 @@ namespace EmployeeLib.BLL
         public UserDTO ConvertToUserDTO(UserEntity entity)
         {
             var converter = new ContactInformationConverter();
-            List<ContactInformationDTO> contactInformation = null;
+            ContactInformationDTO contactInformation = null;
             if (entity.ContactInformations != null)
             {
-                contactInformation = entity.ContactInformations.Select(
-                        contactInformationEntity => converter.ConvertToContactInformationDto(contactInformationEntity))
-                    .ToList();
+                contactInformation = converter.ConvertToContactInformationDto(entity.ContactInformations.First());
             }
             return new UserDTO(entity._userID, entity.FirstName,entity.LastName,entity.UserName,entity.IsActive, entity.IsSuspended, contactInformation);
         }

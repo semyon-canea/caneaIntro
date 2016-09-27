@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EmployeeLib.DAL;
 using EmployeeLib.DBSim;
+using UserLib.BLL;
 
 namespace EmployeeLib.BLL
 {
@@ -24,7 +25,7 @@ namespace EmployeeLib.BLL
             return new UserConverter().ConvertToUserDTO(entity);
         }
 
-        public long SaveNewUser(UserDTO user)
+        public long SaveNewUser(UserUpdateData user)
         {
             var entity = new UserEntity();
             new UserStateTransfer(user, entity).TransferState();
@@ -32,7 +33,7 @@ namespace EmployeeLib.BLL
             return entity._userID;
         }
 
-        public long UpdateUser(UserDTO user)
+        public long UpdateUser(UserUpdateData user)
         {
             var entity = new UserRepository().GetUserById(user.Id);
             new UserStateTransfer(user, entity).TransferState();

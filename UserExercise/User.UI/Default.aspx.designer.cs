@@ -76,15 +76,6 @@ namespace User.UI {
         protected global::System.Web.UI.WebControls.CheckBox isActive;
         
         /// <summary>
-        /// isSuspended control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox isSuspended;
-        
-        /// <summary>
         /// phone control.
         /// </summary>
         /// <remarks>

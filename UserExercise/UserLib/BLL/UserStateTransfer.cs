@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EmployeeLib.DAL;
+using UserLib.BLL;
 
 namespace EmployeeLib.BLL
 {
     public sealed class UserStateTransfer
     {
-        private readonly UserDTO source;
+        private readonly UserUpdateData source;
         private readonly UserEntity target;
 
-        public UserStateTransfer(UserDTO source, UserEntity target)
+        public UserStateTransfer(UserUpdateData source, UserEntity target)
         {
             this.source = source;
             this.target = target;
@@ -24,7 +25,6 @@ namespace EmployeeLib.BLL
             target.UserName = source.UserName;
             target.FirstName = source.FirstName;
             target.LastName = source.LastName;
-            target.IsSuspended = source.IsSuspended;
             target.IsActive = source.IsActive;
             if (target.ContactInformations == null && source.ContactInformation == null)
             {
@@ -33,11 +33,8 @@ namespace EmployeeLib.BLL
 
             if (target.ContactInformations == null && source.ContactInformation != null)
             {
-                target.ContactInformations = new List<ContactInformationEntity>();
-                foreach (var contactInfo in source.ContactInformation)
-                {
-                    CreateNewContactInfo(contactInfo);
-                }
+                CreateNewContactInfo(source.ContactInformation);
+
             }
             else if (target.ContactInformations != null && source.ContactInformation == null)
             {
@@ -45,33 +42,30 @@ namespace EmployeeLib.BLL
             }
             else
             {
-                var toRemove = target.ContactInformations.Where(contactInfo => source.ContactInformation.All(c => c.Id != contactInfo.ID_ContactInformation)).ToList();
+                var toRemove = target.ContactInformations.Where(contactInfo => contactInfo.ID_ContactInformation != source.ContactInformation.Id).ToList();
                 foreach (var contactInformationEntity in toRemove)
                 {
                     target.ContactInformations.Remove(contactInformationEntity);
                 }
-                foreach (var contactInformationEntity in target.ContactInformations)
+                foreach (var contactInformationEntity in target.ContactInformations.Where(ci => ci.ID_ContactInformation == source.ContactInformation.Id))
                 {
-                    var sourceContactInfo =
-                        source.ContactInformation.First(c => c.Id == contactInformationEntity.ID_ContactInformation);
-                    ContactStateTransfer(sourceContactInfo,contactInformationEntity);
+                    ContactStateTransfer(source.ContactInformation, contactInformationEntity);
                 }
-                var newContactInfos = source.ContactInformation.Where(c => !c.IsPersisted);
-                foreach (var contactInfo in newContactInfos)
+                if (!source.ContactInformation.IsPersisted)
                 {
-                    CreateNewContactInfo(contactInfo);
+                    CreateNewContactInfo(source.ContactInformation);
                 }
             }
         }
 
-        private void CreateNewContactInfo(ContactInformationDTO contactInfo)
+        private void CreateNewContactInfo(ContactInformationUpdateData contactInfo)
         {
             var contactEntity = new ContactInformationEntity();
             ContactStateTransfer(contactInfo, contactEntity);
             target.ContactInformations.Add(contactEntity);
         }
 
-        public void ContactStateTransfer(ContactInformationDTO source, ContactInformationEntity target)
+        public void ContactStateTransfer(ContactInformationUpdateData source, ContactInformationEntity target)
         {
             target.Email = source.Email;
             target.Phone = source.Phone;

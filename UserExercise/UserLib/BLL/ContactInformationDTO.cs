@@ -14,7 +14,5 @@
             Email = email;
             Phone = phone;
         }
-
-        public bool IsPersisted => Id > 0;
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EmployeeLib.BLL
+﻿namespace EmployeeLib.BLL
 {
     public class UserDTO
     {
@@ -15,10 +9,9 @@ namespace EmployeeLib.BLL
         public bool IsActive { get; }
         public bool IsSuspended { get; }
 
-        public IList<ContactInformationDTO> ContactInformation { get; }
+        public ContactInformationDTO ContactInformation { get; }
 
-
-        public UserDTO(long id, string firstName, string lastName, string userName, bool isActive, bool isSuspended, IList<ContactInformationDTO> contactInformation)
+        public UserDTO(long id, string firstName, string lastName, string userName, bool isActive, bool isSuspended, ContactInformationDTO contactInformation)
         {
             Id = id;
             FirstName = firstName;
@@ -28,7 +21,5 @@ namespace EmployeeLib.BLL
             IsSuspended = isSuspended;
             ContactInformation = contactInformation;
         }
-
-        public bool IsPersisted => Id > 0;
     }
 }
