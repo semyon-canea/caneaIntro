@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.Optimization;
-using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 using Canea.Common.UI.DependencyInjection;
 using Canea.Common.UI.View;
 using Canea.Framework.Web.UI.WebForms.Application;

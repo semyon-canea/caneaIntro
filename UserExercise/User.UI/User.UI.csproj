@@ -44,9 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Framework.Web.UI.WebForms">
-      <HintPath>C:\CANEA.NET\Framework\Dev\UI\Framework.Web.UI.WebForms\bin\Debug\Framework.Web.UI.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -105,12 +102,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="AspNet.ScriptManager.bootstrap">
-      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.0.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
-    </Reference>
-    <Reference Include="AspNet.ScriptManager.jQuery">
-      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.10.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ScriptManager.MSAjax">
       <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
     </Reference>
@@ -121,12 +112,6 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Telerik.Web.Design">
-      <HintPath>C:\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Web.Device.Detection">
-      <HintPath>C:\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.Device.Detection.dll</HintPath>
-    </Reference>
     <Reference Include="Telerik.Web.UI">
       <HintPath>C:\CANEA.NET\Framework\Dev\External Components\WebForms\Telerik.Web.UI.dll</HintPath>
     </Reference>
@@ -201,6 +186,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="C:\CANEA.NET\Framework\Dev\UI\Framework.Web.UI.WebForms\Framework.Web.UI.WebForms.csproj">
+      <Project>{22027554-3583-46fd-be09-9efc9a8ec9c9}</Project>
+      <Name>Framework.Web.UI.WebForms</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\CANEA.NET\Framework\Dev\Common\Common.UI.WebForms\Common.UI.WebForms.csproj">
       <Project>{5f074363-b4e9-4b0a-9d37-1a29857c5459}</Project>
       <Name>Common.UI.WebForms</Name>
@@ -216,10 +205,6 @@
     <ProjectReference Include="..\User.UI.Logic\User.UI.Logic.csproj">
       <Project>{190C1D8E-6931-4DFD-A97A-9C5E90DF0979}</Project>
       <Name>User.UI.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserLib\UserLib.csproj">
-      <Project>{a16bd653-34e2-4fbe-adf0-0d21e9b0ecb2}</Project>
-      <Name>UserLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
