@@ -1,26 +1,27 @@
-﻿namespace User.UI.Logic
+﻿using Canea.Common;
+
+namespace User.UI.Logic
 {
-    // ReSharper disable once InconsistentNaming
-    public class UserBO
+    public class UserBO:IObjectWithId
     {
-        public UserBO(long id, string firstName, string lastName, string userName, bool isActive, ContactInformationBO contactInformation)
+        public UserBO(long id, string firstName, string lastName, string username, bool isActive, ContactInformationBO contactInformation)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            UserName = userName;
+            Username = username;
             IsActive = isActive;
             ContactInformation = contactInformation;
         }
 
-        public UserBO() : this(id: 0, firstName: null, lastName: null, userName: null, isActive: false, contactInformation: new ContactInformationBO())
+        public UserBO() : this(id: 0, firstName: null, lastName: null, username: null, isActive: false, contactInformation: new ContactInformationBO())
         {
 
         }
         public long Id { get; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public bool IsActive { get; set; }
 
         public ContactInformationBO ContactInformation { get; set; }

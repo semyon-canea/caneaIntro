@@ -1,43 +1,34 @@
 ﻿using System;
-using System.Web.UI.WebControls;
 using Canea.Common.UI.WebForms.View;
+using Telerik.Web.UI;
 using User.UI.Logic;
 
 namespace User.UI
 {
     public partial class _Default : PageBase<DefaultPageController, DefaultPageModel>, IDefaultPageView
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            UpdateUserDataSource();
-        }
 
         protected override void OnUnbind(EventArgs e)
         {
             base.OnUnbind(e);
 
-            var modelSelectedUser = Model.SelectedUser;
+            var modelSelectedUser = Model.Users.SelectedItem;
             if (modelSelectedUser != null)
             {
                 modelSelectedUser.FirstName = this.firstName.Text;
                 modelSelectedUser.LastName = this.lastName.Text;
-                modelSelectedUser.UserName = this.userName.Text;
+                modelSelectedUser.Username = this.userName.Text;
                 modelSelectedUser.IsActive = this.isActive.Checked;
                 modelSelectedUser.ContactInformation.Email = this.email.Text;
                 modelSelectedUser.ContactInformation.Phone = this.phone.Text;
             }
         }
 
-        protected void editUser_OnServerClick(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var userId = long.Parse(button.CommandArgument[0].ToString());
-            Controller.EditUser(userId);
-        }
-
         protected void newUser_OnServerClick(object sender, EventArgs e)
         {
-            Model.SelectedUser = new UserBO();
+            var newUser = new UserBO();
+            Model.Users.Add(newUser);
+            Model.Users.SelectedItem = newUser;
         }
 
         protected void saveUser_OnServerClick(object sender, EventArgs e)
@@ -47,20 +38,24 @@ namespace User.UI
 
         protected void cancel_OnServerClick(object sender, EventArgs e)
         {
-            Model.SelectedUser = null;
-        }
-
-        protected void deleteUser_OnServerClick(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var userId = long.Parse(button.CommandArgument[0].ToString());
-            Controller.DeleteUser(userId);
+            Model.Users.SelectedItem = null;
         }
 
         public void UpdateUserDataSource()
         {
-            Repeater1.DataSource = Model.Users;
-            Repeater1.DataBind();
+            userGrid.Rebind();
+        }
+
+        protected void userGrid_OnNeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            userGrid.DataSource = Model.Users;
+        }
+
+        protected void userGrid_OnDeleteCommand(object sender, GridCommandEventArgs e)
+        {
+            var data = (GridDataItem) e.Item;
+            var userId = long.Parse(data["Id"].Text);
+            Controller.DeleteUser(userId);
         }
     }
 }

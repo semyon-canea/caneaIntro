@@ -17,11 +17,6 @@ namespace User.UI.Logic
             SetUserList();
         }
 
-        public void EditUser(long userId)
-        {
-            View.Model.SelectedUser = new UserBOConverter().ConvertUserDTO(_userHandler.GetUser(userId));
-        }
-
         public void DeleteUser(long userId)
         {
             _userHandler.DeleteUser(userId);
@@ -30,7 +25,7 @@ namespace User.UI.Logic
 
         public void SaveUser()
         {
-            var user = new UserBOConverter().ConvertUserBO(View.Model.SelectedUser);
+            var user = new UserBOConverter().ConvertUserBO(View.Model.Users.SelectedItem);
             if (user.IsPersisted)
             {
                 _userHandler.UpdateUser(user);
@@ -40,13 +35,14 @@ namespace User.UI.Logic
                 _userHandler.SaveNewUser(user);
             }
             SetUserList();
-            View.Model.SelectedUser = null;
+            View.Model.Users.ClearSelection();
         }
 
         private void SetUserList()
         {
             var converter = new UserBOConverter();
-            View.Model.Users = _userHandler.GetUsers().Select(converter.ConvertUserDTO).ToList();
+            View.Model.Users.Clear();
+            View.Model.Users.AddRange(_userHandler.GetUsers().Select(converter.ConvertUserDTO).ToList());;
             View.UpdateUserDataSource();
         }
     }
