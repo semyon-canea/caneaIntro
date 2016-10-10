@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common">
-      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common\bin\Debug\Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.UI">
-      <HintPath>..\..\..\..\CANEA.NET\Framework\Dev\Common\Common.UI\bin\Debug\Common.UI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,6 +51,14 @@
     <Compile Include="UserBOConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="C:\CANEA.NET\Framework\Dev\Common\Common.UI\Common.UI.csproj">
+      <Project>{7b3732f8-e5c1-4d27-8b1b-05992f229f65}</Project>
+      <Name>Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\CANEA.NET\Framework\Dev\Common\Common\Common.csproj">
+      <Project>{03123531-8728-4152-9809-1c9b72078538}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserLib\UserLib.csproj">
       <Project>{a16bd653-34e2-4fbe-adf0-0d21e9b0ecb2}</Project>
       <Name>UserLib</Name>
